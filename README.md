@@ -69,3 +69,7 @@ Frontend: HTML/CSS/JS
 Base de datos: PostgreSQL
 
 ---
+## Diagrama de Gantt
+Cronograma del proyecto
+
+![Diagrama Gantt](DiagramaGantt.png)
