@@ -69,4 +69,3 @@ Frontend: HTML/CSS/JS
 Base de datos: PostgreSQL
 
 ---
-
