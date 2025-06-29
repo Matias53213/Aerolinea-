@@ -62,7 +62,7 @@ para poder armar un carrito de compras personalizado, gestionar mis pedidos pend
 ---
 
 ## Tecnologías Utilizadas
-Backend: Node.js/Express
+Backend: Node.js + TypeScript
 
 Frontend: HTML/CSS/JS
 
