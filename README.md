@@ -75,3 +75,10 @@ Base de datos: PostgreSQL
 Cronograma del proyecto
 
 ![Diagrama Gantt](DiagramaGantt.png)
+
+---
+## Diagrama de la base de datos
+Ejemplo de la base de datos a usar
+
+![Diagrama Base de datos](Diagrama-BD.jpeg)
+
