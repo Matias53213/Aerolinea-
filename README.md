@@ -1,5 +1,5 @@
 # AeroCastle
-![Logo](AeroCastle2.png)
+![Logo](AeroCastle2.jpg)
 
 ---
 ## Descripción del Proyecto
