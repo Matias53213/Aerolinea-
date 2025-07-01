@@ -74,7 +74,7 @@ Base de datos: PostgreSQL
 ## Diagrama de Gantt
 Cronograma del proyecto
 
-![Diagrama Gantt](DiagramaGantt.png)
+![Diagrama Gantt](DiagramaGanttNombres.png)
 
 ---
 ## Diagrama de la base de datos
