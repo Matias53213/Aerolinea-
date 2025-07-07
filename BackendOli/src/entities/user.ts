@@ -4,7 +4,7 @@ import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColu
 export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
-    id: number
+    id: string
 
     @Column()
     firstname: string
@@ -13,7 +13,7 @@ export class User extends BaseEntity {
     lastname: string
 
     @Column({
-        default: true
+    default: true
     })
     active: boolean
 

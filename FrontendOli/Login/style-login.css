@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  margin: 0;
+  background-image: url(imagenes/fondo\ del\ login.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
+
+header {
+  background: linear-gradient(135deg, #0066cc 0%, #004080 100%);
+  color: white;
+  padding: 6px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+} 
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 5px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 25px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  opacity: 0.8;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+.user-actions a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.login-btn {
+  padding: 8px 20px;
+  border: 1px solid white;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.container-form {
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.welcome-back {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.message {
+  padding: 1rem;
+}
+
+.message h2 {
+  font-size: 1.7rem;
+  padding: 1rem 0;
+}
+
+.logo {
+  max-width: 120px;
+  margin-bottom: 1rem;
+}
+
+.formulario {
+  width: 400px;
+  padding: 1rem;
+  margin: 2rem;
+  background-color: rgba(51, 51, 51, 0.6);
+  text-align: center;
+  border-radius: 1rem;
+  display: none;
+}
+
+.form-active {
+    display: block !important;
+}
+
+.create-account {
+  padding: 2.7rem 0 1rem 0;
+  font-size: 1.7rem;
+}
+
+.cuenta-gratis {
+  padding: 1rem 0 2rem 0;
+}
+
+.formulario input {
+  width: 70%;
+  display: block;
+  margin: auto;
+  margin-bottom: 2rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: white thin solid;
+  text-align: center;
+  outline: none;
+  padding: 0.2rem 0;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.formulario input[type="button"] {
+  width: 60%;
+  margin: auto;
+  border: solid thin white;
+  padding: 0.7rem;
+  border-radius: 2rem;
+  background-color: white;
+  font-weight: 600;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #222;
+}
+
+.caja-transparente {
+  background-color: rgba(51, 51, 51, 0.6);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+footer {
+    height: 250px;
+    background: #222;
+    color: #aaa;
+    padding: 60px 0 30px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer-col h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid #444;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 0;
+}
