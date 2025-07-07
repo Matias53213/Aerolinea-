@@ -229,3 +229,27 @@ footer {
     margin: 0 auto;
     padding: 30px 20px 0;
 }
+.auth-toggle {
+  text-align: center;
+  margin: 15px 0;
+  color: #555;
+}
+
+.auth-toggle a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-toggle a:hover {
+  text-decoration: underline;
+}
+
+#login-form {
+  display: none; /
+}
+
+.form-active {
+  display: block ;
+}
