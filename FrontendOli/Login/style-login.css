@@ -133,7 +133,7 @@ nav ul li a:hover {
 }
 
 .form-active {
-    display: block !important;
+    display: block;
 }
 
 .create-account {
