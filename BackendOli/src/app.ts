@@ -13,6 +13,6 @@ app.use(express.json())
 dotenv.config();
 
 
-app.use(userRoutes)
+app.use("/api", userRoutes);
 
 export default app;

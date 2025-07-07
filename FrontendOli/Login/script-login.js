@@ -51,4 +51,60 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     showRegister();
   }
+
+  document.getElementById("btn-login").addEventListener("click", async () => {
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+
+    try {
+      const res = await fetch("http://localhost:4000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Login exitoso");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.user.username);
+        window.location.href = "../index.html";
+      } else {
+        alert(data.message || "Error en el login");
+      }
+    } catch (err) {
+      alert("Error de conexión con el servidor");
+    }
+  });
+
+  document.getElementById("btn-registrar").addEventListener("click", async () => {
+    const username = document.getElementById("nombre").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmar = document.getElementById("confirmar-contrasena").value;
+
+    if (password !== confirmar) {
+      return alert("Las contraseñas no coinciden");
+    }
+
+    try {
+      const res = await fetch("http://localhost:4000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }) 
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Registro exitoso. Ahora podés iniciar sesión.");
+        location.href = "?form=login";
+      } else {
+        alert(data.message || "Error al registrarse");
+      }
+    } catch (err) {
+      alert("Error de conexión con el servidor");
+    }
+  });
 });

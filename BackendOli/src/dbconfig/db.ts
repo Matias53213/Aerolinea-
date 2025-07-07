@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
     entities: [User],
     subscribers:[],
     migrations: [],
-    logging: true,
+    logging: false,
     synchronize: true,
-    dropSchema: true,
+    dropSchema: false,
 })

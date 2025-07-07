@@ -2,24 +2,21 @@ import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColu
 
 @Entity()
 export class User extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: string;
 
-    @PrimaryGeneratedColumn()
-    id: string
+  @Column()
+  username: string;
 
-    @Column()
-    firstname: string
+  @Column({ unique: true })
+  email: string;
 
-    @Column()
-    lastname: string
+  @Column()
+  password: string;
 
-    @Column({
-    default: true
-    })
-    active: boolean
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @CreateDateColumn()
-    createAt:Date;
-
-    @UpdateDateColumn()
-    updateAd: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

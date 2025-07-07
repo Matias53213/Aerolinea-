@@ -74,10 +74,12 @@
         }
         
         .login-btn {
-            padding: 8px 20px;
+            padding: 5px 20px;
             border: 1px solid white;
             border-radius: 4px;
             transition: all 0.3s ease;
+            margin-top: 0px;
+            display: inline-block;
         }
         
         .login-btn:hover {
