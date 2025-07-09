@@ -22,3 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     location.reload();
   });
 });
+
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    alert('Función fuera de servicio');
+});

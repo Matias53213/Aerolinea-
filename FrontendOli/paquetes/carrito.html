@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-paquetes.css">
 </head>
 <body>
 
         <header>
         <div class="header-container">
             <div class="logo">
-                <img src="img/Logo.png" alt="Logo ViajePlus">
+                <img src="../img/Logo.png" alt="Logo ViajePlus">
                 <span>AeroCastle</span>
             </div>
             
             <nav>
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="../index.html">Inicio</a></li>
                     <li><a href="#">Destinos</a></li>
-                    <li><a href="paquetes.html">Paquetes</a></li>
+                    <li><a href="../paquetes/paquetes.html">Paquetes</a></li>
                     <li><a href="#">Ofertas</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="../contacto/contacto.html">Contacto</a></li>
                 </ul>
             </nav>
             
         <div class="user-actions">
         <div id="guest-view">
-            <a href="Login/login.html?form=register" class="login-btn">Regístrate</a>
-            <a href="Login/login.html?form=login">Acceder</a>
+            <a href="../Login/login.html?form=register" class="login-btn">Regístrate</a>
+            <a href="../Login/login.html?form=login">Acceder</a>
         </div>
         <div id="user-view" style="display: none;">
             <span id="welcome-user"></span>
@@ -34,9 +34,16 @@
         </div>
         </div>
         </div>
-    </header>
+        </header>
 
-
+        <main>
+            <h1>Mi Carrito de Viajes</h1>
+            
+            <div class="carrito-container" id="carrito">
+            </div>
+        </main>
+        
+        <script src="script-paquete.js"></script>
         <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -68,6 +75,6 @@
 
         </div>    
     </footer>
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

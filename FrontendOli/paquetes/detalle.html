@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style-paquetes.css">
+</head>
+<body>
+
+        <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="../img/Logo.png" alt="Logo ViajePlus">
+                <span>AeroCastle</span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="#">Destinos</a></li>
+                    <li><a href="../paquetes/paquetes.html">Paquetes</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="../contacto/contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+        <div class="user-actions">
+        <div id="guest-view">
+            <a href="../Login/login.html?form=register" class="login-btn">Regístrate</a>
+            <a href="../Login/login.html?form=login">Acceder</a>
+        </div>
+        <div id="user-view" style="display: none;">
+            <span id="welcome-user"></span>
+            <a href="#" id="logout" class="login-btn">Cerrar sesión</a>
+        </div>
+        </div>
+        </div>
+        </header>
+
+        <main>
+            <div class="paquete-detalle">
+            <div class="paquete-imagen" id="paquete-imagen"></div>
+            <div class="paquete-contenido">
+                <h1 class="paquete-titulo" id="paquete-titulo"></h1>
+                <div class="paquete-precio" id="paquete-precio"></div>
+                <p class="paquete-descripcion" id="paquete-descripcion"></p>
+                
+                <div class="incluye">
+                <h3>Este paquete incluye:</h3>
+                <ul>
+                    <li>Vuelos de ida y vuelta</li>
+                    <li>Alojamiento en hotel seleccionado</li>
+                    <li>Desayuno diario</li>
+                    <li>Traslados aeropuerto-hotel-aeropuerto</li>
+                    <li>Asistencia al viajero</li>
+                </ul>
+                </div>
+                <div class="fechas-viaje">
+                <label for="fecha-salida">Fecha de salida:</label>
+                <input type="date" id="fecha-salida">
+                <br>
+                <label for="fecha-regreso">Fecha de regreso:</label>
+                <input type="date" id="fecha-regreso">
+                </div>
+
+                <button class="paquete-btn" id="agregar-carrito">Agregar al carrito</button>
+            </div>
+            </div>
+        </main>
+        
+        <script src="script-paquete.js"></script>
+        <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>AeroCastle</h3>
+                <p>Tu agencia de viajes de confianza, ofreciendo los mejores paquetes turísticos desde 2010.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Destinos</h3>
+                <ul>
+                    <li><a href="#">Europa</a></li>
+                    <li><a href="#">América</a></li>
+                    <li><a href="#">Asia</a></li>
+                    <li><a href="#">África</a></li>
+                    <li><a href="#">Oceanía</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Paquetes</h3>
+                <ul>
+                    <li><a href="#">Todo incluido</a></li>
+                    <li><a href="#">Luna de miel</a></li>
+                    <li><a href="#">Aventura</a></li>
+                    <li><a href="#">Culturales</a></li>
+                    <li><a href="#">Cruceros</a></li>
+                </ul>
+            </div>
+
+        </div>    
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

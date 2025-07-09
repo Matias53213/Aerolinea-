@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - AeroCastle</title>
+    <link rel="stylesheet" href="style-contacto.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="../img/Logo.png" alt="Logo ViajePlus">
+                <span>AeroCastle</span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="#">Destinos</a></li>
+                    <li><a href="../paquetes/paquetes.html">Paquetes</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+            
+        <div class="user-actions">
+        <div id="guest-view">
+            <a href="../Login/login.html?form=register" class="login-btn">Regístrate</a>
+            <a href="../Login/login.html?form=login">Acceder</a>
+        </div>
+        <div id="user-view" style="display: none;">
+            <span id="welcome-user"></span>
+            <a href="#" id="logout" class="login-btn">Cerrar sesión</a>
+        </div>
+        </div>
+        </div>
+    </header>
+
+    <main class="contact-container">
+        <h1>Contáctanos</h1>
+        
+        <form id="contact-form" class="contact-form">
+            <div class="form-group">
+                <label for="name">Nombre completo:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Asunto:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Enviar Mensaje</button>
+        </form>        
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>AeroCastle</h3>
+                <p>Tu agencia de viajes de confianza, ofreciendo los mejores paquetes turísticos desde 2010.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Destinos</h3>
+                <ul>
+                    <li><a href="#">Europa</a></li>
+                    <li><a href="#">América</a></li>
+                    <li><a href="#">Asia</a></li>
+                    <li><a href="#">África</a></li>
+                    <li><a href="#">Oceanía</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Paquetes</h3>
+                <ul>
+                    <li><a href="#">Todo incluido</a></li>
+                    <li><a href="#">Luna de miel</a></li>
+                    <li><a href="#">Aventura</a></li>
+                    <li><a href="#">Culturales</a></li>
+                    <li><a href="#">Cruceros</a></li>
+                </ul>
+            </div>
+
+        </div>    
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
