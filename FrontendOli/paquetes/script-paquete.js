@@ -1,71 +1,7 @@
-  const paquetes = [
-    { 
-      id: 1, 
-      nombre: "Cancún Todo Incluido", 
-      precio: 1200,
-      imagen: "img/Cancun.jpg",
-      descripcion: "Disfruta de 7 dias en un lujoso resort todo incluido frente al mar Caribe. Este paquete incluye vuelos directos, traslados privados, habitación con vista al mar, acceso ilimitado a restaurantes y bares, y actividades diarias.",
-      duracion: 7
-    },
-    { 
-      id: 2, 
-      nombre: "Roma Clásica", 
-      precio: 1500,
-      imagen: "img/Roma.jpg",
-      descripcion: "Sumérgete en la historia con este tour de 6 dias por la Ciudad Eterna. Visita el Coliseo, el Vaticano, la Fontana di Trevi y más. Incluye alojamiento en hotel céntrico, desayunos y entradas a los principales monumentos.",
-      duracion: 6
-    },
-    { 
-      id: 3, 
-      nombre: "Aventura en Costa Rica", 
-      precio: 1800,
-      imagen: "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-      descripcion: "8 días de pura aventura en la naturaleza. Incluye canopy en Monteverde, rafting en el río Pacuare, caminata por el volcán Arenal, alojamiento en eco-lodges y transporte entre destinos.",
-      duacion: 8
-    },
-    { 
-      id: 4, 
-      nombre: "París Romántico", 
-      precio: 2000,
-      imagen: "img/Paris.jpg",
-      descripcion: "7 dias en hotel boutique, cena en Torre Eiffel y tour por Montmartre",
-      duracion: 7
-    },
-    { 
-      id: 5, 
-      nombre: "Japón Tradicional", 
-      precio: 3500,
-      imagen: "https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-      descripcion: "10 días recorriendo Tokio, Kioto y Osaka con guía en español",
-      duracion: 10
-    },
-    { 
-      id: 6, 
-      nombre: "Nueva York Express", 
-      precio: 1700,
-      imagen: "img/NewYork.jpg",
-      descripcion: "5 dias en Manhattan, entradas a Broadway y tour por los rascacielos",
-      duracion: 5
-    },
-    { 
-      id: 7, 
-      nombre: "Paraiso en Bali", 
-      precio: 1700,
-      imagen: "img/Bali.jpg",
-      descripcion: "Relájate en las playas de arena blanca de Bali con este paquete de lujo que incluye masajes, cena romántica y excursiones a templos sagrados.",
-      duracion: 7 
-    },
-    { 
-      id: 8, 
-      nombre: "Machu Picchu Místico", 
-      precio: 1700,
-      imagen: "img/MachuPichu.jpg",
-      descripcion: "Aventúrate en este viaje a la ciudad perdida de los Incas, incluye tren a Machu Picchu, guía especializado y alojamiento en Cusco.",
-      duracion: 8 
-    }
-  ];
-
+let paquetes = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+const BASE_URL = "http://localhost:4000";
 
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -78,20 +14,37 @@ function actualizarContadorCarrito() {
   });
 }
 
+async function cargarPaquetes() {
+  try {
+    const response = await fetch(`${BASE_URL}/api/paquetes`);
+    if (!response.ok) throw new Error('Error al cargar paquetes del servidor');
+    paquetes = await response.json();
+    mostrarProductos();
+  } catch (error) {
+    console.error(error);
+    alert('No se pudieron cargar los paquetes desde el servidor.');
+  }
+}
+
 function mostrarProductos() {
   const contenedor = document.getElementById("productos");
   if (!contenedor) return;
 
   contenedor.innerHTML = "";
-  
+
   paquetes.forEach(producto => {
+    const descripcion = producto.descripcion || "Sin descripción disponible";
+    const imagenUrl = producto.imagen.startsWith("/uploads")
+      ? `${BASE_URL}${producto.imagen}`
+      : producto.imagen;
+
     contenedor.innerHTML += `
       <div class="paquete">
-        <div class="paquete-img" style="background-image: url('${producto.imagen}')"></div>
+        <div class="paquete-img" style="background-image: url('${imagenUrl}')"></div>
         <div class="paquete-info">
           <h3>${producto.nombre}</h3>
           <p class="paquete-precio">$${producto.precio}</p>
-          <p>${producto.descripcion.substring(0, 60)}...</p>
+          <p>${descripcion.substring(0, 60)}...</p>
           <button class="paquete-btn" onclick="window.location.href='detalle.html?id=${producto.id}'">Ver detalles</button>
         </div>
       </div>
@@ -101,21 +54,24 @@ function mostrarProductos() {
   actualizarContadorCarrito();
 }
 
-
 function mostrarDetallePaquete() {
   const urlParams = new URLSearchParams(window.location.search);
   const paqueteId = parseInt(urlParams.get('id'));
   const paquete = paquetes.find(p => p.id === paqueteId);
-  
+
   if (!paquete) {
     window.location.href = 'paquetes.html';
     return;
   }
 
-  document.getElementById('paquete-imagen').style.backgroundImage = `url('${paquete.imagen}')`;
+  const imagenUrl = paquete.imagen.startsWith("/uploads")
+    ? `${BASE_URL}${paquete.imagen}`
+    : paquete.imagen;
+
+  document.getElementById('paquete-imagen').style.backgroundImage = `url('${imagenUrl}')`;
   document.getElementById('paquete-titulo').textContent = paquete.nombre;
   document.getElementById('paquete-precio').textContent = `$${paquete.precio}`;
-  document.getElementById('paquete-descripcion').textContent = paquete.descripcion;
+  document.getElementById('paquete-descripcion').textContent = paquete.descripcion || "Sin descripción";
 
   const inputSalida = document.getElementById('fecha-salida');
   const inputRegreso = document.getElementById('fecha-regreso');
@@ -124,7 +80,7 @@ function mostrarDetallePaquete() {
     if (!inputSalida.value) return;
 
     const salida = new Date(inputSalida.value);
-    const dias = paquete.duracion || 7; 
+    const dias = paquete.duracion || 7;
 
     const regreso = new Date(salida);
     regreso.setDate(salida.getDate() + dias);
@@ -169,8 +125,6 @@ function mostrarDetallePaquete() {
   });
 }
 
-
-
 function renderCarrito() {
   const contenedor = document.getElementById("carrito");
   if (!contenedor) return;
@@ -190,13 +144,18 @@ function renderCarrito() {
 
   carrito.forEach((item, index) => {
     total += item.precio;
+
+    const imagenUrl = item.imagen.startsWith("/uploads")
+      ? `${BASE_URL}${item.imagen}`
+      : item.imagen;
+
     html += `
       <div class="item-carrito">
         <div class="item-info">
-          <div class="item-img" style="background-image: url('${item.imagen}')"></div>
+          <div class="item-img" style="background-image: url('${imagenUrl}')"></div>
           <div>
             <h3>${item.nombre}</h3>
-            <p>${item.descripcion.substring(0, 50)}...</p>
+            <p>${(item.descripcion || "").substring(0, 50)}...</p>
             <p><small>${item.fechaSalida ? `Del ${item.fechaSalida} al ${item.fechaRegreso}` : ''}</small></p>
           </div>
         </div>
@@ -244,11 +203,13 @@ document.addEventListener('DOMContentLoaded', function () {
   actualizarContadorCarrito();
 
   if (document.getElementById("productos")) {
-    mostrarProductos();
+    cargarPaquetes();
   }
 
   if (document.getElementById("paquete-imagen")) {
-    mostrarDetallePaquete();
+    cargarPaquetes().then(() => {
+      mostrarDetallePaquete();
+    });
   }
 
   if (document.getElementById("carrito")) {
