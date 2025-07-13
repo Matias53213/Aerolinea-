@@ -35,7 +35,7 @@ export const registerUser = async (username: string, email: string, password: st
   await userRepo.save(newUser);
 };
 
-export const getUserByIdService = async (id: string): Promise<User> => {
+export const getUserByIdService = async (id: number): Promise<User> => {
   try {
     const user = await UserRepository.findById(id);
     return user;
@@ -51,4 +51,20 @@ export const getAllUsers = async (): Promise<User[]> => {
   } catch (error) {
     throw error;
   }
+};
+export const updateUserService = async (id: number, username: string, email: string): Promise<User> => {
+  const user = await userRepo.findOneBy({ id });
+  if (!user) throw new Error("Usuario no encontrado");
+
+  user.username = username;
+  user.email = email;
+
+  return await userRepo.save(user);
+};
+
+export const deleteUserByIdService = async (id: number): Promise<void> => {
+  const user = await userRepo.findOneBy({ id });
+  if (!user) throw new Error("Usuario no encontrado");
+
+  await userRepo.remove(user);
 };

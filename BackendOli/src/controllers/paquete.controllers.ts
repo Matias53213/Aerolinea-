@@ -6,7 +6,11 @@ type ExpressHandler = (req: Request, res: Response) => Promise<Response | void>;
 
 export const getPaquetes: ExpressHandler = async (req, res) => {
     try {
-        const paquetes = await AppDataSource.getRepository(Paquete).find({
+        const repo = AppDataSource.getRepository(Paquete);
+        const destacado = req.query.destacado === 'true';
+
+        const paquetes = await repo.find({
+            where: destacado ? { destacado: true } : {},
             order: { id: 'ASC' }
         });
 
@@ -47,7 +51,7 @@ export const getPaqueteById: ExpressHandler = async (req, res) => {
 
 export const createPaquete: ExpressHandler = async (req, res) => {
     try {
-        const { nombre, descripcion, precio, imagen, duracion } = req.body;
+        const { nombre, descripcion, precio, imagen, duracion, destacado } = req.body;
         
         if (!nombre || !descripcion || isNaN(parseFloat(precio))) {
             return res.status(400).json({ error: 'Faltan campos obligatorios' });
@@ -59,6 +63,7 @@ export const createPaquete: ExpressHandler = async (req, res) => {
             precio: parseFloat(precio),
             imagen: imagen || 'default.jpg',
             duracion: duracion ? parseInt(duracion) : 7,
+            destacado: destacado === true || destacado === 'true' ? true : false,
         });
         
         const resultado = await AppDataSource.getRepository(Paquete).save(nuevoPaquete);
@@ -97,7 +102,7 @@ export const deletePaquete: ExpressHandler = async (req, res) => {
 export const updatePaquete: ExpressHandler = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, descripcion, precio, imagen, duracion } = req.body;
+        const { nombre, descripcion, precio, imagen, duracion, destacado } = req.body;
         
         const paquete = await AppDataSource.getRepository(Paquete).findOneBy({ 
             id: parseInt(id) 
@@ -112,6 +117,7 @@ export const updatePaquete: ExpressHandler = async (req, res) => {
         if (precio) paquete.precio = parseFloat(precio);
         if (imagen) paquete.imagen = imagen;
         if (duracion) paquete.duracion = parseInt(duracion);
+        if (typeof destacado !== 'undefined') paquete.destacado = destacado === true || destacado === 'true';
 
         const resultado = await AppDataSource.getRepository(Paquete).save(paquete);
         return res.json(resultado);

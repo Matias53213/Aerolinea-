@@ -31,6 +31,7 @@
         <div id="user-view" style="display: none;">
             <span id="welcome-user"></span>
             <a href="#" id="logout" class="login-btn">Cerrar sesión</a>
+            <a href="carrito.html" class="cart-icon"> 🛒 <span class="cart-count">0</span></a>
         </div>
         </div>
         </div>
@@ -43,6 +44,7 @@
                 <h1 class="paquete-titulo" id="paquete-titulo"></h1>
                 <div class="paquete-precio" id="paquete-precio"></div>
                 <p class="paquete-descripcion" id="paquete-descripcion"></p>
+                <div id="paquete-duracion"></div>
                 
                 <div class="incluye">
                 <h3>Este paquete incluye:</h3>
@@ -59,7 +61,7 @@
                 <input type="date" id="fecha-salida">
                 <br>
                 <label for="fecha-regreso">Fecha de regreso:</label>
-                <input type="date" id="fecha-regreso">
+                <input type="date" id="fecha-regreso" disabled> 
                 </div>
 
                 <button class="paquete-btn" id="agregar-carrito">Agregar al carrito</button>

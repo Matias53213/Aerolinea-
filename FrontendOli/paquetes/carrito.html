@@ -3,6 +3,7 @@
 <head>
     <title>Document</title>
     <link rel="stylesheet" href="style-paquetes.css">
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 <body>
 
@@ -36,14 +37,40 @@
         </div>
         </header>
 
-        <main>
-            <h1>Mi Carrito de Viajes</h1>
-            
-            <div class="carrito-container" id="carrito">
-            </div>
-        </main>
+    <main>
+        <h1>Mi Carrito de Viajes</h1>
         
-        <script src="script-paquete.js"></script>
+        <div class="carrito-container" id="carrito">
+        </div>
+        <div id="wallet_container" style="margin-top: 20px; display: none;"></div>
+    </main>
+
+    <script src="script-paquete.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mp = new MercadoPago('TEST-ce5a85a4-57e0-4d26-abfc-1c22ad943d4e', {
+                locale: 'es-AR'
+            });
+            const bricksBuilder = mp.bricks();
+            window.renderMercadoPagoButton = function(preferenceId) {
+                const walletContainer = document.getElementById('wallet_container');
+                walletContainer.style.display = 'block';
+                
+                bricksBuilder.create('wallet', 'wallet_container', {
+                    initialization: {
+                        preferenceId: preferenceId,
+                    },
+                    customization: {
+                        visual: {
+                            buttonBackground: 'black', 
+                            borderRadius: '6px'
+                        }
+                    }
+                });
+            };
+        });
+    </script>
+        
         <footer>
         <div class="footer-container">
             <div class="footer-col">

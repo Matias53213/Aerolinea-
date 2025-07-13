@@ -73,6 +73,11 @@ function mostrarDetallePaquete() {
   document.getElementById('paquete-precio').textContent = `$${paquete.precio}`;
   document.getElementById('paquete-descripcion').textContent = paquete.descripcion || "Sin descripción";
 
+  const duracionEl = document.getElementById('paquete-duracion');
+  if (duracionEl) {
+    duracionEl.innerHTML = `<span><i>Duracion del viaje:</i> ${paquete.duracion || 7} días</span>`;
+  }
+
   const inputSalida = document.getElementById('fecha-salida');
   const inputRegreso = document.getElementById('fecha-regreso');
 
@@ -103,7 +108,7 @@ function mostrarDetallePaquete() {
     const fechaRegreso = inputRegreso.value;
 
     if (!fechaSalida || !fechaRegreso) {
-      alert("Por favor selecciona ambas fechas.");
+      alert("Por favor selecciona la fecha de salida.");
       return;
     }
 
@@ -149,22 +154,26 @@ function renderCarrito() {
       ? `${BASE_URL}${item.imagen}`
       : item.imagen;
 
-    html += `
-      <div class="item-carrito">
-        <div class="item-info">
-          <div class="item-img" style="background-image: url('${imagenUrl}')"></div>
-          <div>
-            <h3>${item.nombre}</h3>
-            <p>${(item.descripcion || "").substring(0, 50)}...</p>
-            <p><small>${item.fechaSalida ? `Del ${item.fechaSalida} al ${item.fechaRegreso}` : ''}</small></p>
-          </div>
-        </div>
+  html += `
+    <div class="item-carrito">
+      <div class="item-info">
+        <div class="item-img" style="background-image: url('${imagenUrl}')"></div>
         <div>
-          <span class="item-precio">$${item.precio}</span>
-          <button class="eliminar-btn" onclick="eliminarItem(${index})">Eliminar</button>
+          <h3>
+            <a href="detalle.html?id=${item.id}" style="color: #007bff; text-decoration: none;">
+              ${item.nombre}
+            </a>
+          </h3>
+          <p>${(item.descripcion || "").substring(0, 50)}...</p>
+          <p><small>${item.fechaSalida ? `Del ${item.fechaSalida} al ${item.fechaRegreso}` : ''}</small></p>
         </div>
       </div>
-    `;
+      <div>
+        <span class="item-precio">$${item.precio}</span>
+        <button class="eliminar-btn" onclick="eliminarItem(${index})">Eliminar</button>
+      </div>
+    </div>
+  `;
   });
 
   html += `
@@ -194,9 +203,40 @@ window.vaciarCarrito = function() {
   actualizarContadorCarrito();
 }
 
-window.comprar = function() {
-  alert('Compra realizada con éxito (simulación)');
-  vaciarCarrito();
+window.comprar = async function() {
+    if (carrito.length === 0) {
+        alert("El carrito está vacío");
+        return;
+    }
+
+    try {
+        const itemsParaPago = carrito.map(item => ({
+            nombre: item.nombre,
+            precio: Number(item.precio),
+            cantidad: 1,
+            paqueteId: item.id
+        }));
+
+        const response = await fetch(`${BASE_URL}/api/mercadopago/pago`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: itemsParaPago })
+        });
+
+        if (!response.ok) throw new Error("Error en el pago");
+
+        const data = await response.json();
+        
+        if (data.id) {
+            renderMercadoPagoButton(data.id);
+        } else {
+            throw new Error("No se recibió ID de preferencia");
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert(`Error al procesar el pago: ${error.message}`);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {

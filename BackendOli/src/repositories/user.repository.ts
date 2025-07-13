@@ -3,7 +3,7 @@ import { AppDataSource } from "../dbconfig/db";
 import { User } from "../entities/user";
 
 const UserRepository = AppDataSource.getRepository(User).extend({
-  findById: async function (id: string): Promise<User>{
+  findById: async function (id: number): Promise<User>{
     const user = await this.findOneBy({id})
     if(user)
     return user;

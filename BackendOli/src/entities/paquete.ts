@@ -19,4 +19,8 @@ export class Paquete {
 
   @Column({ type: 'int', default: 7 })
   duracion: number;
+
+  @Column({ type: 'boolean', default: false })
+  destacado: boolean;
+
 }
