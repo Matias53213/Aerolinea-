@@ -25,19 +25,25 @@
                 </ul>
             </nav>
             
-        <div class="user-actions">
-        <div id="guest-view">
-            <a href="Login/login.html?form=register" class="login-btn">Regístrate</a>
-            <a href="Login/login.html?form=login">Acceder</a>
+            <div class="user-actions">
+                <div id="guest-view">
+                    <a href="Login/login.html?form=register" class="login-btn">Regístrate</a>
+                    <a href="Login/login.html?form=login">Acceder</a>
+                </div>
+                <div id="user-view" style="display: none;">
+                    <div class="user-dropdown">
+                        <button class="user-dropbtn">
+                            <span id="username-display"></span> ▼
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="micuenta/miCuenta.html">Mi cuenta</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>
+                    <a href="./paquetes/carrito.html" class="cart-icon"> 🛒 <span class="cart-count">0</span></a>
+                </div>
+            </div>
         </div>
-        <div id="user-view" style="display: none;">
-            <span id="welcome-user"></span>
-            <a href="#" id="logout" class="login-btn">Cerrar sesión</a>
-            <a href="./paquetes/carrito.html" class="cart-icon"> 🛒 <span class="cart-count">0</span></a>
-        </div>
-        </div>
-        </div>
-        <script src="./paquetes/script-paquete.js"></script>
     </header>
     <section class="hero">
         <div class="hero-content">

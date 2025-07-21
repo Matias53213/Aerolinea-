@@ -17,9 +17,9 @@ export const crearPreferencia = async (req: Request, res: Response) => {
           currency_id: 'ARS',
         })),
         back_urls: {
-          success: "http://127.0.0.1:5500/FrontendOli/paquetes/carrito.html",
-          failure: "http://127.0.0.1:5500/FrontendOli/paquetes/carrito.html",
-          pending: "http://127.0.0.1:5500/FrontendOli/paquetes/carrito.html",
+          success: "127.0.0.1:5500/FrontendOli/pago/pago.html",
+          failure: "127.0.0.1:5500/FrontendOli/paquetes/carrito.html",
+          pending: "127.0.0.1:5500/FrontendOli/paquetes/carrito.html",
         },
       },
     });

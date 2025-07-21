@@ -154,26 +154,26 @@ function renderCarrito() {
       ? `${BASE_URL}${item.imagen}`
       : item.imagen;
 
-  html += `
-    <div class="item-carrito">
-      <div class="item-info">
-        <div class="item-img" style="background-image: url('${imagenUrl}')"></div>
+    html += `
+      <div class="item-carrito">
+        <div class="item-info">
+          <div class="item-img" style="background-image: url('${imagenUrl}')"></div>
+          <div>
+            <h3>
+              <a href="detalle.html?id=${item.id}" style="color: #007bff; text-decoration: none;">
+                ${item.nombre}
+              </a>
+            </h3>
+            <p>${(item.descripcion || "").substring(0, 50)}...</p>
+            <p><small>${item.fechaSalida ? `Del ${item.fechaSalida} al ${item.fechaRegreso}` : ''}</small></p>
+          </div>
+        </div>
         <div>
-          <h3>
-            <a href="detalle.html?id=${item.id}" style="color: #007bff; text-decoration: none;">
-              ${item.nombre}
-            </a>
-          </h3>
-          <p>${(item.descripcion || "").substring(0, 50)}...</p>
-          <p><small>${item.fechaSalida ? `Del ${item.fechaSalida} al ${item.fechaRegreso}` : ''}</small></p>
+          <span class="item-precio">$${item.precio}</span>
+          <button class="eliminar-btn" onclick="eliminarItem(${index})">Eliminar</button>
         </div>
       </div>
-      <div>
-        <span class="item-precio">$${item.precio}</span>
-        <button class="eliminar-btn" onclick="eliminarItem(${index})">Eliminar</button>
-      </div>
-    </div>
-  `;
+    `;
   });
 
   html += `
@@ -209,7 +209,46 @@ window.comprar = async function() {
         return;
     }
 
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+
+    if (!token || !userId) {
+        const confirmar = confirm("Tu sesión ha expirado. ¿Quieres ir a iniciar sesión?");
+        if (confirmar) {
+            window.location.href = "../Login/login.html?form=login&redirect=" + encodeURIComponent(window.location.href);
+        }
+        return;
+    }
+
     try {
+        const reservaciones = carrito.map(item => ({
+            paqueteId: item.id,
+            travel_date: item.fechaSalida,
+            return_date: item.fechaRegreso,
+            passengers: 1,
+            total_price: parseFloat(item.precio)
+        }));
+
+        const reservaResponse = await fetch(`${BASE_URL}/api/reservations`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                userId: parseInt(userId),
+                reservaciones
+            })
+        });
+
+        if (!reservaResponse.ok) {
+            const errorData = await reservaResponse.json().catch(() => ({}));
+            throw new Error(errorData.error || "Error al crear las reservas");
+        }
+
+        const reservasData = await reservaResponse.json();
+        const reservasIds = reservasData.reservaciones.map(r => r.id);
+
         const itemsParaPago = carrito.map(item => ({
             nombre: item.nombre,
             precio: Number(item.precio),
@@ -217,28 +256,46 @@ window.comprar = async function() {
             paqueteId: item.id
         }));
 
-        const response = await fetch(`${BASE_URL}/api/mercadopago/pago`, {
+        const total = carrito.reduce((sum, item) => sum + Number(item.precio), 0);
+
+        const pagoResponse = await fetch(`${BASE_URL}/api/mercadopago/pago`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ items: itemsParaPago })
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ 
+                items: itemsParaPago,
+                external_reference: JSON.stringify(reservasIds),
+                total_amount: total
+            })
         });
 
-        if (!response.ok) throw new Error("Error en el pago");
+        if (!pagoResponse.ok) {
+            throw new Error("Error al generar el pago");
+        }
 
-        const data = await response.json();
+        const pagoData = await pagoResponse.json();
         
-        if (data.id) {
-            renderMercadoPagoButton(data.id);
+        localStorage.setItem('currentReservations', JSON.stringify(reservasIds));
+
+        if (pagoData.id) {
+            renderMercadoPagoButton(pagoData.id);
         } else {
             throw new Error("No se recibió ID de preferencia");
         }
 
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error en comprar:", error);
         alert(`Error al procesar el pago: ${error.message}`);
+        
+        if (error.message.includes("expirado") || error.message.includes("autenticado")) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            localStorage.removeItem("username");
+        }
     }
 }
-
 document.addEventListener('DOMContentLoaded', function () {
   actualizarContadorCarrito();
 

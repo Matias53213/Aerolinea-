@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta | AeroCastle</title>
+    <link rel="stylesheet" href="miCuenta.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="../img/Logo.png" alt="Logo ViajePlus">
+                <span>AeroCastle</span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="#">Destinos</a></li>
+                    <li><a href="../paquetes/paquetes.html">Paquetes</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="../contacto/contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <div id="guest-view">
+                    <a href="../Login/login.html?form=register" class="login-btn">Regístrate</a>
+                    <a href="../Login/login.html?form=login">Acceder</a>
+                </div>
+                <div id="user-view" style="display: none;">
+                    <div class="user-dropdown">
+                        <button class="user-dropbtn">
+                            <span id="username-display"></span> ▼
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="#">Mi cuenta</a>
+                            <a href="#reservations">Mis reservas</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>
+                    <a href="../paquetes/carrito.html" class="cart-icon"> 🛒 <span class="cart-count">0</span></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="account-container">
+        <aside class="account-sidebar">
+            <div class="user-profile">
+                <img src="../img/User.jpg" alt="Avatar" class="user-avatar" id="user-avatar">
+                <p id="email-display"></p>
+            </div>
+            
+            <ul class="account-menu">
+                <li><a href="#profile" class="active">Mi perfil</a></li>
+                <li><a href="#reservations">Mis reservas</a></li>
+            </ul>
+        </aside>
+
+        <div class="account-content">
+            <section id="profile-section" class="account-section">
+                <h2 class="section-title">Mi Perfil</h2>
+                
+                <div class="view-mode">
+                    <div class="account-field">
+                        <label>Nombre de usuario:</label>
+                        <p id="username-view"></p>
+                    </div>
+                    <div class="account-field">
+                        <label>Correo electrónico:</label>
+                        <p id="email-view"></p>
+                    </div>
+                    <button id="edit-profile-btn" class="btn-edit">Editar perfil</button>
+                </div>
+                
+                <div class="edit-mode">
+                    <div class="form-group">
+                        <label for="username-input">Nombre de usuario:</label>
+                        <input type="text" id="username-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-input">Correo electrónico:</label>
+                        <input type="email" id="email-input" required>
+                    </div>
+                    <div class="form-actions">
+                        <button id="save-profile-btn" class="btn-save">Guardar cambios</button>
+                        <button id="cancel-edit-btn" class="btn-cancel">Cancelar</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reservations-section" class="account-section" style="display: none;">
+                <h2 class="section-title">Mis Reservas</h2>
+                <div class="reservas-list" id="reservations-list">
+                    <p>Cargando tus reservas...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="miCuenta.js"></script>
+</body>
+</html>

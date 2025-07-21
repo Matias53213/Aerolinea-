@@ -1,0 +1,320 @@
+:root {
+    --primary-color: #009ee3;
+    --secondary-color: #f5f5f5;
+    --success-color: #4CAF50;
+    --warning-color: #FF9800;
+    --error-color: #F44336;
+    --text-color: #333333;
+    --light-gray: #f5f5f5;
+    --medium-gray: #e0e0e0;
+    --dark-gray: #757575;
+    --white: #ffffff;
+    --black: #000000;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+.payment-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+.payment-card {
+    margin-bottom: 30px;
+}
+.payment-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.payment-icon {
+    width: 60px;
+    height: 60px;
+    fill: #4CAF50;
+}
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.detail-label {
+    font-weight: 500;
+    color: #555;
+}
+.detail-value {
+    font-weight: 400;
+}
+.reservation-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.btn-download, .btn-back {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.btn-download {
+    background: #2196F3;
+    color: white;
+    border: none;
+}
+.btn-back {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+.success-message {
+    background: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.error-message {
+    background: #f44336;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.payment-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px;
+    transition: opacity 0.3s ease;
+}
+.payment-card {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.payment-icon {
+    width: 60px;
+    height: 60px;
+    fill: var(--success-color);
+    margin-bottom: 15px;
+    transition: fill 0.3s ease;
+}
+
+.payment-icon.warning {
+    fill: var(--warning-color);
+}
+
+.payment-header h1 {
+    color: var(--success-color);
+    margin: 0;
+    font-size: 28px;
+    transition: color 0.3s ease;
+}
+.payment-details {
+    border-top: 1px solid var(--medium-gray);
+    border-bottom: 1px solid var(--medium-gray);
+    padding: 20px 0;
+    margin-bottom: 25px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+.detail-value {
+    font-weight: 700;
+}
+.payment-actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.btn-download, .btn-back {
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+}
+.btn-download {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-download:hover {
+    background-color: #007bbd;
+    transform: translateY(-2px);
+}
+
+.btn-back {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-back:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-2px);
+}
+
+.reservation-info {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+.reservation-info h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 22px;
+    border-bottom: 1px solid var(--medium-gray);
+    padding-bottom: 10px;
+}
+.status-confirmed {
+    color: #2e7d32;
+    background-color: #e8f5e9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.status-pending {
+    color: #ff8f00;
+    background-color: #fff8e1;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.status-cancelled {
+    color: #c62828;
+    background-color: #ffebee;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.error-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 12px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    max-width: 90%;
+}
+
+.error-message.show {
+    opacity: 1;
+}
+
+.error-message svg {
+    flex-shrink: 0;
+}
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@media (max-width: 600px) {
+    .payment-card {
+        padding: 20px;
+    }
+    
+    .payment-actions {
+        flex-direction: column;
+    }
+    
+    .btn-download, .btn-back {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .payment-header h1 {
+        font-size: 24px;
+    }
+    
+    .reservation-info h2 {
+        font-size: 20px;
+    }
+}

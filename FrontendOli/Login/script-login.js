@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (res.ok) {
         alert("Login exitoso");
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id);
         localStorage.setItem("username", data.user.username);
         window.location.href = "../index.html";
       } else {
